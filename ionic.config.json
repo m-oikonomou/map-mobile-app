@@ -1,7 +1,8 @@
 {
   "name": "map-mobile-app",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

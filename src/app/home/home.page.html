@@ -12,15 +12,16 @@
   <div class="input-group">
     <label for="validationTooltip03" style="text-align: center;">Εισάγετε περιοχή αναζήτησης</label>
     <!-- <input #search type="text" class="form-control" id="validationTooltip03" placeholder="Περιοχή ή διεύθυνση" required (keydown.enter)="$event.preventDefault()"> -->
-    <div class="input-group" style="width: 60rem; position: center;">
-        <ion-input #search type="text" class="form-control" id="validationTooltip03"
-            placeholder="Περιοχή ή διεύθυνση" required (keydown.enter)="$event.preventDefault()"></ion-input>
-        <div class="input-group-btn">
-            <button class="btn btn-default" type="button" (click)="saveLocation()">
-                <i class="glyphicon glyphicon-search"></i>
-            </button>
-        </div>
-    </div>
+    <!-- <div class="input-group" style="width: 60rem; position: center;"> -->
+      <ion-item>
+        <input #search type="text" class="form-control" id="validationTooltip03"
+            placeholder="Περιοχή ή διεύθυνση" required (keydown.enter)="$event.preventDefault()">
+        <!-- <div class="input-group-btn"> -->
+            <ion-button color="primary" type="button" (click)="saveLocation()"><ion-icon name="search-outline"></ion-icon>
+            </ion-button>
+        <!-- </div> -->
+      </ion-item>
+    <!-- </div> -->
 </div>
 
     <agm-map [latitude]="location.latitude" [longitude]="location.longitude" [zoom]="location.zoom"
@@ -44,12 +45,10 @@
 
 </agm-map>
 <br>
-<ion-grid>
     <ion-button color="primary" size="small" type="button" value="Aποθήκευση συντεταγμένων"
         (click)="onPostLocationMarkers()">Aποθήκευση συντ/νων</ion-button> &nbsp;&nbsp;&nbsp;&nbsp;
     <ion-button color="primary" size="small" type="button" value="Ανάκτηση συντεταγμένων"
         (click)="onGetLocationMarkers()">Ανάκτηση συντ/νων</ion-button>
-</ion-grid>
 
 </ion-content>
 </ion-app>
