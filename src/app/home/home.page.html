@@ -1,6 +1,7 @@
+<ion-app>
 <ion-header [translucent]="true">
   <ion-toolbar color="dark">
-    <ion-title>
+    <ion-title >
       Courier mobile map
     </ion-title>
   </ion-toolbar>
@@ -8,7 +9,19 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 
-    <input type="text" class="native-input" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+  <div class="input-group">
+    <label for="validationTooltip03" style="text-align: center;">Εισάγετε περιοχή αναζήτησης</label>
+    <!-- <input #search type="text" class="form-control" id="validationTooltip03" placeholder="Περιοχή ή διεύθυνση" required (keydown.enter)="$event.preventDefault()"> -->
+    <div class="input-group" style="width: 60rem; position: center;">
+        <ion-input #search type="text" class="form-control" id="validationTooltip03"
+            placeholder="Περιοχή ή διεύθυνση" required (keydown.enter)="$event.preventDefault()"></ion-input>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="saveLocation()">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </div>
+    </div>
+</div>
 
     <agm-map [latitude]="location.latitude" [longitude]="location.longitude" [zoom]="location.zoom"
     (mapClick)="addMarker($event.coords.lat, $event.coords.lng, '')">
@@ -18,17 +31,39 @@
         (dragEnd)="markerDragEnd(coords, $event)">
         <!-- [label]="marker.label" -->
         <agm-info-window #infowindow>
-            <input #label id="label" name="label + {{i}}" class="form-control" type="text"
-                [value]="marker.label">
-            <input #labelButton class="btn btn-primary btn-sm" type="button" value="Αποθήκευση"
-                (click)="onUpdateLocationMarkers(label.value, i)">
+            <ion-input #label id="label" name="label + {{i}}" class="form-control" type="text"
+                [value]="marker.label"></ion-input>
+            <ion-button #labelButton color="primary" size="small" type="button" value="Αποθήκευση"
+                (click)="onUpdateLocationMarkers(label.value, i)">Αποθ/ση</ion-button>
             <!-- <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true"
             (click)="onChangeInfoWindowView(i)">>></a> -->
-            <input #removeMarkButton class="btn btn-danger btn-sm" type="button" value="Διαγραφή πινέζας"
-                (click)="onDeleteLocationMarkers(i)">
+            <ion-button #removeMarkButton color="danger"  size="small" type="button" value="Διαγραφή πινέζας"
+                (click)="onDeleteLocationMarkers(i)">Διαγ/φή πιν.</ion-button>
         </agm-info-window>
     </agm-marker>
 
 </agm-map>
+<br>
+<ion-grid>
+    <ion-button color="primary" size="small" type="button" value="Aποθήκευση συντεταγμένων"
+        (click)="onPostLocationMarkers()">Aποθήκευση συντ/νων</ion-button> &nbsp;&nbsp;&nbsp;&nbsp;
+    <ion-button color="primary" size="small" type="button" value="Ανάκτηση συντεταγμένων"
+        (click)="onGetLocationMarkers()">Ανάκτηση συντ/νων</ion-button>
+</ion-grid>
 
 </ion-content>
+</ion-app>
+
+
+<!-- <label [hidden]="infoWindowView != 0" #label name="label + {{i}}" [value]="marker.label">{{ marker.label }}</label> <br>
+<a [hidden]="infoWindowView != 0" href="#" class="" role="button" style="float: right;" aria-pressed="true" (click)="onChangeInfoWindowView(i, 1)">Edit >></a>
+
+<input [hidden]="infoWindowView != 1" #textBox id="text" name="text + {{i}}" class="form-control input-sm" type="text" [value]="marker.label" (value)="marker.label">
+<input [hidden]="infoWindowView != 1" #textButton class="btn btn-primary btn-sm" type="button" value="Αποθήκευση"
+    (click)="onUpdateLocationMarkers(textBox.value, i)"><br>
+<a [hidden]="infoWindowView != 1" href="#" class="active" style="float: left;" role="button" aria-pressed="true" (click)="onChangeInfoWindowView(i, 0)"><< Back</a>
+<a [hidden]="infoWindowView != 1" href="#" class="active" style="float: right;" role="button" aria-pressed="true" (click)="onChangeInfoWindowView(i, 2)">More options >></a>
+
+<input *ngIf="infoWindowView != 2" #removeMarkButton class="btn btn-danger btn-sm" type="button" value="Διαγραφή πινέζας"
+    (click)="onDeleteLocationMarkers(i)"><br>
+<a *ngIf="infoWindowView != 2" href="#" class="" role="button" style="float: left;" aria-pressed="true" (click)="onChangeInfoWindowView(i, 1)"><< Back</a> -->
